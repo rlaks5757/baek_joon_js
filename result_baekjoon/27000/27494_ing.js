@@ -1,47 +1,40 @@
 const fs = require("fs");
 
 // const input = fs.readFileSync("/dev/stdin").toString().split(" ");
-const input = fs.readFileSync("problem/27494.txt").toString();
+const input = Number(
+  fs.readFileSync("result_baekjoon/27000/27494.txt").toString().trim()
+);
 
-const num = Number(input);
+const count_ticket = (i_string) => {
+  for (let j = 0; j < i_string.length - 3; j++) {
+    for (let k = j + 1; k < i_string.length - 2; k++) {
+      for (let l = k + 1; l < i_string.length - 1; l++) {
+        for (let v = l + 1; v < i_string.length; v++) {
+          const concat = parseInt(
+            i_string[j] + i_string[k] + i_string[l] + i_string[v]
+          );
 
-const this_year_arr = String(2023).split("");
-
-const handleTicketCount = (num) => {
-  if (num < 2023) {
-    return 0;
-  } else {
-    let ticket_count = 0;
-    let arr = [];
-
-    for (let i = 2023; i <= num; i++) {
-      const i_arr = String(i).split("");
-
-      let index = 0;
-
-      this_year_arr.forEach((com, idx) => {
-        const slice_arr = i_arr.slice(index > 0 ? -1 : index, i_arr.length);
-
-        const find_index = slice_arr.findIndex((com2) => com2 === com);
-
-        console.log(slice_arr);
-        console.log(find_index, idx);
-        if (find_index === -1) {
-          return;
-        } else {
-          if (idx === this_year_arr.length - 1) {
-            ticket_count + 1;
-          } else {
-            index = idx + find_index;
+          if (concat === 2023) {
+            return true;
           }
         }
-      });
+      }
     }
-
-    fs.writeFileSync("test.json", JSON.stringify(arr));
-
-    return ticket_count;
   }
 };
 
-console.log(handleTicketCount(num));
+if (input < 2023) {
+  console.log(0);
+} else {
+  let result = 0;
+
+  for (let i = 2023; i <= input; i++) {
+    const i_string = i.toString();
+
+    if (count_ticket(i_string)) {
+      result += 1;
+    }
+  }
+
+  console.log(result);
+}
