@@ -28,8 +28,6 @@ while (min <= max) {
     0
   );
 
-  console.log({ max, min, mid, line_count });
-
   if (line_count >= K) {
     if (mid > length) length = mid;
 
@@ -38,3 +36,5 @@ while (min <= max) {
     max = mid - 1;
   }
 }
+
+console.log(length);
