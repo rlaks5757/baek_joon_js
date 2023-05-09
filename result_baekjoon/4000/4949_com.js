@@ -18,22 +18,24 @@ input.forEach((com, idx) => {
       if (com[i] === "(" || com[i] === "[") {
         stack.push(com[i]);
       } else if (com[i] === ")") {
-        if (stack[stack.length - 1] === "(") {
-          stack.pop();
-        } else {
+        if (stack.length === 0 || stack[stack.length - 1] !== "(") {
           result.push("no");
           break;
         }
+        stack.pop();
       } else if (com[i] === "]") {
-        if (stack[stack.length - 1] === "[") {
-          stack.pop();
-        } else {
+        if (stack.length === 0 || stack[stack.length - 1] !== "[") {
           result.push("no");
           break;
         }
+        stack.pop();
       } else {
         if (i === com.length - 1 && com[i] === ".") {
-          result.push("yes");
+          if (stack.length === 0) {
+            result.push("yes");
+          } else {
+            result.push("no");
+          }
         }
       }
     }
