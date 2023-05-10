@@ -24,7 +24,7 @@ const binary_search = () => {
     let slice_wood = 0;
 
     for (let wood of wood_arr) {
-      if (wood > mid) slice_wood += wood_length - mid;
+      if (wood > mid) slice_wood += wood - mid;
     }
 
     if (slice_wood >= wood_length) {
@@ -40,3 +40,21 @@ const binary_search = () => {
 };
 
 console.log(binary_search());
+
+//first
+// let wood_length_max = Math.max(...wood_arr);
+
+// while (true) {
+//   const slice_wood_arr_sum = wood_arr.reduce((acc, cur) => {
+//     const slice_wood = cur - wood_length_max;
+
+//     return acc + (slice_wood > 0 ? slice_wood : 0);
+//   }, 0);
+
+//   if (slice_wood_arr_sum === wood_length) {
+//     console.log(wood_length_max);
+//     break;
+//   }
+
+//   wood_length_max--;
+// }
